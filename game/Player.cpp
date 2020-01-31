@@ -7772,8 +7772,10 @@ void idPlayer::UpdateViewAngles( void ) {
 			viewAngles.roll = 0.0f;
 			viewAngles.pitch = 30.0f;
 		} else {
-			viewAngles.roll = 40.0f;
-			viewAngles.pitch = -15.0f;
+			//viewAngles.roll = 40.0f;
+			//viewAngles.pitch = -15.0f;
+			viewAngles.roll = 0.0f;
+			viewAngles.pitch = 30.0f;
 		}
 		return;
 	}
@@ -10922,7 +10924,7 @@ void idPlayer::CalculateFirstPersonView( void ) {
 		
 		jointHandle_t joint = animator.GetJointHandle( "camera" );
 		animator.GetJointTransform( joint, gameLocal.time, origin, axis );
-		firstPersonViewOrigin = ( origin + modelOffset ) * ( viewAxis * physicsObj.GetGravityAxis() ) + physicsObj.GetOrigin() + viewBob;
+		firstPersonViewOrigin = (origin + modelOffset) * (viewAxis * physicsObj.GetGravityAxis()) + physicsObj.GetOrigin() + viewBob + idVec3(0, 0, -1000);
 		firstPersonViewAxis = axis * ang.ToMat3() * physicsObj.GetGravityAxis();
 	} else {
 		// offset for local bobbing and kicks
@@ -11046,7 +11048,7 @@ void idPlayer::CalculateRenderView( void ) {
 	 			renderView->viewaxis = firstPersonViewAxis;
 				SmoothenRenderView( true );
  
-	 			if ( !pm_thirdPerson.GetBool() ) {
+	 			if ( !pm_thirdPerson.GetBool()) {
 	 				// set the viewID to the clientNum + 1, so we can suppress the right player bodies and
 	 				// allow the right player view weapons
 	 				renderView->viewID = entityNumber + 1;
@@ -11057,8 +11059,9 @@ void idPlayer::CalculateRenderView( void ) {
 				OffsetThirdPersonVehicleView( pm_thirdPersonClip.GetBool() );
 // RAVEN END
 				SmoothenRenderView( false );
-			} else if ( pm_thirdPerson.GetBool() ) {
-				OffsetThirdPersonView( pm_thirdPersonAngle.GetFloat(), pm_thirdPersonRange.GetFloat(), pm_thirdPersonHeight.GetFloat(), pm_thirdPersonClip.GetBool() );
+// yur mum 1
+			} else if ( pm_thirdPerson.GetBool() || true) {
+				OffsetThirdPersonView( pm_thirdPersonAngle.GetFloat(), pm_thirdPersonRange.GetFloat(), pm_thirdPersonHeight.GetFloat() + 30.0f, pm_thirdPersonClip.GetBool() );
 				SmoothenRenderView( false );
 			} else if ( pm_thirdPersonDeath.GetBool() ) {
 				range = gameLocal.time < minRespawnTime ? ( gameLocal.time + RAGDOLL_DEATH_TIME - minRespawnTime ) * ( 120.0f / RAGDOLL_DEATH_TIME ) : 120.0f;

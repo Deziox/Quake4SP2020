@@ -417,13 +417,13 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 				SetState ( "Lower", 0 );
 				return SRESULT_DONE;
 			}
-
+			/*yur mum 1
 			if( player && !player->CanFire() )	{
 				fireHeldTime = 0;
 				SetState ( "Idle", 4 );
 				return SRESULT_DONE;
 			}
-
+			*/
 
 	
 			if ( gameLocal.time - fireHeldTime > chargeTime ) {	
@@ -431,7 +431,7 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 				PlayEffect ( "fx_chargedflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "chargedfire", parms.blendFrames );
 			} else {
-				Attack ( false, 1, spread, 0, 1.0f );
+				Attack ( false, 22, spread, 0, 1.0f );
 				PlayEffect ( "fx_normalflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "fire", parms.blendFrames );
 			}
