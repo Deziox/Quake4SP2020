@@ -2553,6 +2553,7 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		// go straight out of the view
 		muzzleOrigin = playerViewOrigin;
 		muzzleAxis = playerViewAxis;		
+
 		muzzleOrigin += playerViewAxis[0] * muzzleOffset;
 	}
 
